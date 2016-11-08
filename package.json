@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --config webpack-config.js --hot --inline --port 8080",
-    "test": "esw src/ lib/"
+    "test": "mocha",
+    "coverage": "nyc yarn test",
+    "lint": "esw src/ lib/"
   },
   "peerDependencies": {
     "react": "^15.3.2",
@@ -19,12 +21,13 @@
     "classnames": "^2.2.5"
   },
   "devDependencies": {
-    "babel-core": "^6.18.0",
+    "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
+    "chai": "^3.5.0",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
@@ -32,7 +35,10 @@
     "eslint-plugin-react": "^6.6.0",
     "eslint-watch": "^2.1.14",
     "graceful-fs": "^4.1.9",
+    "jsdom": "^9.8.3",
     "less": "^2.7.1",
+    "mocha": "^3.1.2",
+    "nyc": "^8.4.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
