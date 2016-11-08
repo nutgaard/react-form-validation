@@ -1,4 +1,4 @@
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
 import DevTools from './devtools';
 
 import Login from './login';
@@ -11,7 +11,5 @@ function Application() {
         </div>
     );
 }
-
-Application.propTypes = {};
 
 export default Application;
