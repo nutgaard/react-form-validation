@@ -1,66 +1,41 @@
 import React, { Component } from 'react';
-import { Field, Fields, reduxForm } from 'redux-form';
-import validate, { rules } from './form/validate';
-import { validForm } from './form/validForm';
+import { SubmissionError } from 'redux-form';
+import SkjemaFelt  from './../lib/nav-field';
+import { rules } from './../lib/validate';
+import { validForm } from './../lib/validForm';
 
-function FormField(field) {
-    return (
-        <div className="input-row">
-            <input {...field.input} type={field.type} />
-            { field.meta.touched && field.meta.error && <span className="error">{field.meta.error}</span> }
-        </div>
-    );
-}
-
-function FeedbackSummary(config) {
-    const { names, ...fields } = config;
-
-    const errors = names
-        .map((name) => fields[name].meta.error)
-        .filter((errors) => errors && errors.length > 0)
-        .reduce((acc, errors) => {
-            if (Array.isArray(errors)) {
-                return [ ...acc, ...errors ];
-            }
-            return [ ...acc, errors ];
-        }, []);
-
-    if (errors.length === 0) {
-        return null;
+class Login extends Component {
+    render() {
+        return (
+            <form onSubmit={this.props.handleSubmit} noValidate="noValidate">
+                {this.props.errorSummary}
+                <SkjemaFelt name="firstName" type="text" className="blokk-s" required aria-required="true">First Name</SkjemaFelt>
+                <SkjemaFelt name="lastName" type="text" className="blokk-s" required>Last Name</SkjemaFelt>
+                <SkjemaFelt name="email" type="text" className="blokk-s">Email</SkjemaFelt>
+                <button type="submit">Submit</button>
+            </form>
+        );
     }
-
-    const errorLi = errors.map((error) => <li>{error}</li>);
-    return (
-        <ul>
-            {errorLi}
-        </ul>
-    );
 }
 
-
-function Login({ handleSubmit }) {
-    return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="firstName">First Name</label>
-                <Field name="firstName" component={FormField} type="text"/>
-            </div>
-            <div>
-                <label htmlFor="lastName">Last Name</label>
-                <Field name="lastName" component={FormField} type="text"/>
-            </div>
-            <div>
-                <label htmlFor="email">Email</label>
-                <Field name="email" component={FormField} type="email"/>
-            </div>
-            <button type="submit">Submit</button>
-        </form>
-    );
-}
+// later som man gjør ett fetch kall. Blir ikke kalt før skjemaet er validert ok. :)
+const asyncOnsubmit =(values) => new Promise((resolve, reject) => {
+    console.log('onSubmit config', values);
+    // reject('ok');     // Returns promise, resolved([ undefined ])
+    resolve('ok'); // Returns promise, resolved('ok')
+}).then((ok) => {
+    // throw new SubmissionError({ _error: 'Ukjent feil' })
+    console.log('submit ok', ok);
+    return 'All ok'
+}).catch((err) => {
+    console.error('submit feiled', err);
+    throw new SubmissionError({ _error: 'Ukjent feil' });
+});
 
 export default validForm({
     form: 'login',
-    validation: {
+    onSubmit: asyncOnsubmit,
+    validate: {
         'firstName': [rules.required, rules.contains('a')],
         'lastName': [rules.required, rules.contains('b')],
         'email': [rules.required, rules.contains('c')]
