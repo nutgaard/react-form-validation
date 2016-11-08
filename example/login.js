@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 import React, { PropTypes as PT } from 'react';
 import { SubmissionError } from 'redux-form';
-import SkjemaFelt from './../lib/nav-field';
-import { rules } from './../lib/validate';
-import validForm from './../lib/validForm';
+import SkjemaFelt from './../src/nav-field';
+import { rules } from './../src/validate';
+import validForm from './../src/validForm';
 
 function Login(props) {
     return (

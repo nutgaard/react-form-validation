@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack-config.js --hot --inline --port 8080",
     "test": "mocha",
+    "tdd": "mocha -w",
     "coverage": "nyc yarn test",
     "lint": "esw src/ lib/"
   },
@@ -28,6 +29,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
     "chai": "^3.5.0",
+    "enzyme": "^2.5.1",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
