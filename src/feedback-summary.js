@@ -17,7 +17,7 @@ export function DefaultListCreator({ header, errors }) {
     );
 }
 DefaultListCreator.propTypes = {
-    header: PT.string.isRequired,
+    header: PT.oneOfType([PT.string, PT.node]).isRequired,
     errors: PT.arrayOf(PT.node).isRequired
 };
 
@@ -51,7 +51,7 @@ export function getErrors(props) {
                     error
                 }))];
             }
-            return [...acc, namedErrors];
+            return [...acc, {name: namedErrors.name, error: namedErrors.errors}];
         }, []);
 
     if (formErrors.length === 0) {

@@ -2,7 +2,7 @@ import React, { PropTypes as PT } from 'react';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 
-const fieldClasses = (className, meta) => classNames(className, {
+export const fieldClasses = (className, meta) => classNames(className, {
     'har-valideringsfeil': meta.touched && meta.error
 });
 const createInlineError = (name, meta) => {
