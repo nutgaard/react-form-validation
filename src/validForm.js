@@ -16,7 +16,6 @@ export default function validForm(config) {
 
     const defaultSummary = feedbackSummaryFactory(listCreator, elementCreator);
 
-
     const fields = Object.keys(validate);
 
     return (WrappedComponent) => {
