@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import chai, { expect } from 'chai';
 import subset from 'chai-subset';
@@ -18,11 +19,11 @@ describe('feedback-summary', () => {
             expect(wrappingDiv.props()).to.containSubset({
                 'aria-live': 'assertive',
                 'aria-atomic': 'true',
-                'tabIndex': '-1',
-                'className': 'panel panel-feilsammendrag text-left'
+                tabIndex: '-1',
+                className: 'panel panel-feilsammendrag text-left'
             });
             expect(header.props()).to.containSubset({
-                'className': 'typo-undertittel'
+                className: 'typo-undertittel'
             });
         });
 
@@ -80,7 +81,7 @@ describe('feedback-summary', () => {
             expect(li.key()).to.equal('name-error');
             expect(anchor.prop('href')).to.equal('#name');
             expect(anchor.text()).to.equal('error');
-        })
+        });
     });
 
     describe('getErrors', () => {
@@ -92,8 +93,8 @@ describe('feedback-summary', () => {
             const props = {
                 submittoken: 'token',
                 names: ['field1', 'field2'],
-                field1: { meta: { error: [] }},
-                field2: { meta: { }}
+                field1: { meta: { error: [] } },
+                field2: { meta: {} }
             };
             expect(Func.getErrors(props)).to.equal(null);
         });
@@ -102,14 +103,14 @@ describe('feedback-summary', () => {
             const props = {
                 submittoken: 'token',
                 names: ['field1', 'field2'],
-                field1: { meta: { error: ['required', 'contains'] }},
-                field2: { meta: { error: 'contains' }}
+                field1: { meta: { error: ['required', 'contains'] } },
+                field2: { meta: { error: 'contains' } }
             };
 
             expect(Func.getErrors(props)).to.deep.equal([
-                { name: 'field1', error: 'required'},
-                { name: 'field1', error: 'contains'},
-                { name: 'field2', error: 'contains'}
+                { name: 'field1', error: 'required' },
+                { name: 'field1', error: 'contains' },
+                { name: 'field2', error: 'contains' }
             ]);
         });
     });
@@ -119,8 +120,8 @@ describe('feedback-summary', () => {
             const props = {
                 submittoken: 'token',
                 names: ['field1', 'field2'],
-                field1: { meta: { error: ['required', 'contains'] }},
-                field2: { meta: { error: 'contains' }}
+                field1: { meta: { error: ['required', 'contains'] } },
+                field2: { meta: { error: 'contains' } }
             };
             const panel = Func.feedbackSummaryFactory();
             const wrapper = shallow(React.createElement(panel, props));
@@ -137,8 +138,8 @@ describe('feedback-summary', () => {
             const props = {
                 submittoken: 'token',
                 names: ['field1', 'field2'],
-                field1: { meta: { error: [] }},
-                field2: { meta: { }}
+                field1: { meta: { error: [] } },
+                field2: { meta: {} }
             };
 
             const panel = Func.feedbackSummaryFactory();

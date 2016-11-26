@@ -1,7 +1,7 @@
 /* eslint-env mocha */
+/* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai';
-import validate from './validate';
-import * as Func from './validate';
+import validate, * as Func from './validate';
 
 describe('validate', () => {
     describe('arrayOf', () => {
@@ -11,50 +11,50 @@ describe('validate', () => {
 
             expect(Func.arrayOf(liste)).to.equal(liste);
             expect(Func.arrayOf(verdi)).to.deep.equal([verdi]);
-        })
+        });
     });
 
     describe('minLength', () => {
         it('should return predefined errormessage', () => {
-            var errorMessage = Func.minLength(5)("aba");
+            const errorMessage = Func.minLength(5)('aba');
             expect(errorMessage).to.not.be.equal(undefined);
             expect(errorMessage.length).to.not.be.equal(0);
         });
 
         it('should return given errorMessage', () => {
-            expect(Func.minLength(5, 'e')("aba")).to.be.equal('e');
+            expect(Func.minLength(5, 'e')('aba')).to.be.equal('e');
         });
 
         it('should return undefined when valid', () => {
-            expect(Func.minLength(5, 'e')("abaBA")).to.be.equal(undefined);
+            expect(Func.minLength(5, 'e')('abaBA')).to.be.equal(undefined);
         });
     });
 
     describe('maxLength', () => {
         it('should return predefined errormessage', () => {
-            var errorMessage = Func.maxLength(3)("abab");
+            const errorMessage = Func.maxLength(3)('abab');
             expect(errorMessage).to.not.be.equal(undefined);
             expect(errorMessage.length).to.not.be.equal(0);
         });
         it('should return given errorMessage', () => {
-            expect(Func.maxLength(3, 'e')("abab")).to.be.equal('e');
+            expect(Func.maxLength(3, 'e')('abab')).to.be.equal('e');
         });
         it('should return undefined when valid', () => {
-            expect(Func.maxLength(3, 'e')("aba")).to.be.equal(undefined);
+            expect(Func.maxLength(3, 'e')('aba')).to.be.equal(undefined);
         });
     });
 
     describe('contains', () => {
         it('should return predefined errormessage', () => {
-            var errorMessage = Func.contains('abba')("abab");
+            const errorMessage = Func.contains('abba')('abab');
             expect(errorMessage).to.not.equal(undefined);
             expect(errorMessage.length).to.not.be.equal(0);
         });
         it('should return given errorMessage', () => {
-            expect(Func.contains('abba', 'e')("abab")).to.be.equal('e');
+            expect(Func.contains('abba', 'e')('abab')).to.be.equal('e');
         });
         it('should return undefined when valid', () => {
-            expect(Func.contains('abba', 'e')("aba abba oasida")).to.be.equal(undefined);
+            expect(Func.contains('abba', 'e')('aba abba oasida')).to.be.equal(undefined);
         });
     });
 
@@ -79,8 +79,8 @@ describe('validate', () => {
         });
 
         it('should apply single rule', () => {
-            var config = { field: rule(1) };
-            var validator = validate(config);
+            const config = { field: rule(1) };
+            const validator = validate(config);
             const result = validator({ field: '' });
 
             expect(result).to.deep.equal({ field: [error(1)] });
@@ -93,7 +93,7 @@ describe('validate', () => {
 
             expect(result).to.deep.equal({
                 field: [error(1), error(2)]
-            })
+            });
         });
 
         it('should not have keys with no errors', () => {
@@ -105,7 +105,7 @@ describe('validate', () => {
             });
 
             expect(result).to.deep.equal({
-                field: [ error(1) ]
+                field: [error(1)]
             });
         });
 
@@ -125,10 +125,10 @@ describe('validate', () => {
             });
 
             expect(result).to.deep.equal({
-                field1: [ error(1), error(2), error(3)],
-                field2: [ error(4), error(5)],
-                field4: [ error(6)]
+                field1: [error(1), error(2), error(3)],
+                field2: [error(4), error(5)],
+                field4: [error(6)]
             });
-        })
+        });
     });
 });

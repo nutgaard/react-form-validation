@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
@@ -14,7 +15,7 @@ describe('NavField', () => {
         });
 
         it('should return extra class if there are errors', () => {
-            expect(Func.fieldClasses('test', { touched: true, error: []})).to.equal('test har-valideringsfeil');
+            expect(Func.fieldClasses('test', { touched: true, error: [] })).to.equal('test har-valideringsfeil');
         });
     });
 
@@ -28,7 +29,7 @@ describe('NavField', () => {
         };
         const defaultErrorProps = {
             ...defaultProps,
-            meta: { touched: true, error: [ 'contains' ]}
+            meta: { touched: true, error: ['contains'] }
         };
 
         it('should render field', () => {
@@ -49,7 +50,7 @@ describe('NavField', () => {
         });
 
         it('should render div with className', () => {
-            const wrapper = shallow(<Func.FieldRenderer {...defaultProps} className="test"/>);
+            const wrapper = shallow(<Func.FieldRenderer {...defaultProps} className="test" />);
 
             const div = wrapper.find('div');
 
@@ -68,7 +69,7 @@ describe('NavField', () => {
         it('should render inline-error message if there are errors', () => {
             const wrapper = shallow(<Func.FieldRenderer {...defaultErrorProps} />);
 
-            const errorMessage = wrapper.find("#error-name");
+            const errorMessage = wrapper.find('#error-name');
             const input = wrapper.find('input');
 
             expect(errorMessage.length).to.equal(1);
@@ -84,11 +85,9 @@ describe('NavField', () => {
         const store = configureMockStore()();
         const ContextProvider = reduxForm({
             form: 'name'
-        })(function ContextProvider({ children }) {
-            return (
-                    <form>{children}</form>
-            );
-        });
+        })(({ children }) => (
+            <form>{children}</form>
+        ));
 
 
         it('should render children as label', () => {

@@ -51,7 +51,7 @@ export function getErrors(props) {
                     error
                 }))];
             }
-            return [...acc, {name: namedErrors.name, error: namedErrors.errors}];
+            return [...acc, { name: namedErrors.name, error: namedErrors.errors }];
         }, []);
 
     if (formErrors.length === 0) {
