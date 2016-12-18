@@ -8,6 +8,7 @@
     "test": "mocha",
     "tdd": "mocha -w",
     "coverage": "nyc --check-coverage --lines 100 yarn test",
+    "coveragereport": "nyc report --reporter=html yarn test",
     "lint": "esw src/ lib/"
   },
   "peerDependencies": {
@@ -42,7 +43,7 @@
     "jsdom": "^9.8.3",
     "less": "^2.7.1",
     "mocha": "^3.1.2",
-    "nyc": "^8.4.0",
+    "nyc": "^10.0.0",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
