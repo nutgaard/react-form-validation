@@ -4,7 +4,7 @@ import React from 'react';
 import chai, { expect } from 'chai';
 import subset from 'chai-subset';
 import { shallow } from 'enzyme';
-import * as Func from './feedback-summary';
+import * as Func from '../src/feedback-summary';
 
 chai.use(subset);
 
@@ -20,11 +20,9 @@ describe('feedback-summary', () => {
                 'aria-live': 'assertive',
                 'aria-atomic': 'true',
                 tabIndex: '-1',
-                className: 'panel panel-feilsammendrag text-left'
+                className: 'feedbacksummary'
             });
-            expect(header.props()).to.containSubset({
-                className: 'typo-undertittel'
-            });
+            expect(header.length).to.equal(1);
         });
 
         it('should render correct header', () => {

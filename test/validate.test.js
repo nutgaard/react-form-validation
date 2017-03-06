@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai';
-import validate, * as Func from './validate';
+import validate, * as Func from '../src/validate';
 
 describe('validate', () => {
     describe('arrayOf', () => {

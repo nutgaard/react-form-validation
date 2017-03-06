@@ -1,0 +1,15 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+machine:
+  node:
+    version: 5.1.0
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+  override:
+    - yarn
+test:
+  override:
+    - yarn run circle
