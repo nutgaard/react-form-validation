@@ -6,3 +6,15 @@ A helper library to `redux-form` to implement better validation.
 [![Dependency Status](https://david-dm.org/nutgaard/react-form-validation.svg)](https://david-dm.org/nutgaard/react-form-validation)
 [![devDependency Status](https://david-dm.org/nutgaard/react-form-validation/dev-status.svg)](https://david-dm.org/nutgaard/react-form-validation#info=devDependencies)
 [![peerDependency Status](https://david-dm.org/nutgaard/react-form-validation/peer-status.svg)](https://david-dm.org/nutgaard/react-form-validation#info=peerDependencies)
+
+
+## How to install
+
+```
+npm install react-redux-form-validation react react-dom react-redux redux redux-form redux-thunk --save
+```
+
+
+## How to use
+
+**TODO**, for now look at the example and source code.
