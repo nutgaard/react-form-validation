@@ -6,16 +6,16 @@ import { shallow, mount } from 'enzyme';
 import { reduxForm } from 'redux-form';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import NavField, * as Func from './nav-field';
+import LabelledField, * as Func from '../src/field';
 
-describe('NavField', () => {
+describe('LabelledField', () => {
     describe('fieldClasses', () => {
         it('should return classNames if there is no validation errors', () => {
-            expect(Func.fieldClasses('test', {})).to.equal('test');
+            expect(Func.fieldClasses('test', '', {})).to.equal('test');
         });
 
         it('should return extra class if there are errors', () => {
-            expect(Func.fieldClasses('test', { touched: true, error: [] })).to.equal('test har-valideringsfeil');
+            expect(Func.fieldClasses('test', 'error-class', { touched: true, error: [] })).to.equal('test error-class');
         });
     });
 
@@ -73,15 +73,15 @@ describe('NavField', () => {
             const input = wrapper.find('input');
 
             expect(errorMessage.length).to.equal(1);
-            expect(errorMessage.prop('className')).to.equal('skjema-feilmelding');
+            expect(errorMessage.prop('className')).to.equal('inline-error-message');
             expect(errorMessage.text()).to.equal('contains');
-            expect(wrapper.prop('className')).to.equal('har-valideringsfeil');
+            expect(wrapper.prop('className')).to.equal('has-errors');
             expect(input.prop('aria-invalid')).to.equal(true);
             expect(input.prop('aria-describedby')).to.equal('error-name');
         });
     });
 
-    describe('NavField', () => {
+    describe('LabelledField', () => {
         const store = configureMockStore()();
         const ContextProvider = reduxForm({
             form: 'name'
@@ -94,7 +94,9 @@ describe('NavField', () => {
             const wrapper = mount(
                 <Provider store={store}>
                     <ContextProvider>
-                        <NavField className="test" required="required">label</NavField>
+                        <LabelledField className="test" required="required" name="name" type="text">
+                            label
+                        </LabelledField>
                     </ContextProvider>
                 </Provider>
             );

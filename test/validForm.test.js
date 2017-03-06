@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import chai, { expect } from 'chai';
 import subset from 'chai-subset';
-import validForm, { __RewireAPI__ } from './validForm';
+import validForm, { __RewireAPI__ } from '../src/validForm';
 
 chai.use(subset);
 

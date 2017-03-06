@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable import/no-extraneous-dependencies, no-underscore-dangle */
 import { expect } from 'chai';
-import reducer, * as Func from './reducer';
+import reducer, * as Func from '../src/reducer';
 
 describe('reducer', () => {
     const formState = { values: {} };

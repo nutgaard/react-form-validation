@@ -2,13 +2,13 @@ import React, { PropTypes as PT } from 'react';
 import { Field } from 'redux-form';
 import classNames from 'classnames';
 
-export const fieldClasses = (className, meta) => classNames(className, {
-    'har-valideringsfeil': meta.touched && meta.error
+export const fieldClasses = (className, errorClass, meta) => classNames(className, {
+    [errorClass]: meta.touched && meta.error
 });
-const createInlineError = (name, meta) => {
+const createInlineError = (name, inlineErrorClass, meta) => {
     if (meta.touched && meta.error) {
         return (
-            <div id={`error-${name}`} className="skjema-feilmelding">
+            <div id={`error-${name}`} className={inlineErrorClass}>
                 {meta.error}
             </div>
         );
@@ -16,8 +16,8 @@ const createInlineError = (name, meta) => {
     return null;
 };
 
-export function FieldRenderer({ input, meta, type, name, label, className, ...props }) {
-    const inlineError = createInlineError(name, meta);
+export function FieldRenderer({ input, meta, type, name, label, className, errorClass, inlineErrorClass, ...props }) {
+    const inlineError = createInlineError(name, inlineErrorClass, meta);
     const ekstraProps = {
         'aria-invalid': meta.touched && !!meta.error,
         'aria-describedby': meta.touched && meta.error ? `error-${name}` : '',
@@ -26,7 +26,7 @@ export function FieldRenderer({ input, meta, type, name, label, className, ...pr
     };
 
     return (
-        <div className={fieldClasses(className, meta)}>
+        <div className={fieldClasses(className, errorClass, meta)}>
             <label htmlFor={name}>{label}</label>
             <input type={type} {...input} {...ekstraProps} />
             {inlineError}
@@ -40,15 +40,22 @@ FieldRenderer.propTypes = {
     type: PT.string.isRequired,
     name: PT.string.isRequired,
     label: PT.node.isRequired,
-    className: PT.string
+    className: PT.string,
+    errorClass: PT.string,
+    inlineErrorClass: PT.string
 };
 
-function NavField({ children, ...props }) {
+FieldRenderer.defaultProps = {
+    errorClass: 'has-errors',
+    inlineErrorClass: 'inline-error-message'
+};
+
+function LabelledField({ children, ...props }) {
     return <Field {...props} component={FieldRenderer} label={children} />;
 }
 
-NavField.propTypes = {
+LabelledField.propTypes = {
     children: PT.node.isRequired
 };
 
-export default NavField;
+export default LabelledField;

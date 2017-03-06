@@ -1,15 +1,33 @@
 {
-  "name": "forms",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "name": "react-redux-form-validation",
+  "description": "Custom validation with redux-forms",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "license": "X11",
+  "homepage": "https://github.com/nutgaard/react-form-validation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nutgaard/react-form-validation"
+  },
+  "bugs": {
+    "url": "https://github.com/nutgaard/react-form-validation/issues"
+  },
+  "keywords": [
+    "react",
+    "redux-form",
+    "custom-validation"
+  ],
   "scripts": {
     "start": "webpack-dev-server --config webpack-config.js --hot --inline --port 8080",
     "test": "mocha",
     "tdd": "mocha -w",
     "coverage": "nyc --check-coverage --lines 100 yarn test",
     "coveragereport": "nyc report --reporter=html yarn test",
-    "lint": "esw src/ lib/"
+    "lint": "esw src/ lib/",
+    "build": "yarn test && yarn run lint && babel src/ --out-dir dist",
+    "prepublish": "in-publish && npm run build || not-in-publish",
+    "codecov": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && codecov",
+    "circle": "yarn run lint && yarn run codecov"
   },
   "peerDependencies": {
     "react": "^15.3.2",
@@ -32,6 +50,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "chai": "^3.5.0",
     "chai-subset": "^1.3.0",
+    "codecov": "^1.0.1",
     "enzyme": "^2.5.1",
     "eslint": "^3.9.1",
     "eslint-config-airbnb": "^13.0.0",
@@ -40,6 +59,7 @@
     "eslint-plugin-react": "^6.6.0",
     "eslint-watch": "^2.1.14",
     "graceful-fs": "^4.1.9",
+    "in-publish": "^2.0.0",
     "jsdom": "^9.8.3",
     "less": "^2.7.1",
     "mocha": "^3.1.2",

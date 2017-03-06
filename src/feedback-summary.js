@@ -6,10 +6,10 @@ export function DefaultListCreator({ header, errors }) {
             role="alert"
             aria-live="assertive"
             aria-atomic="true"
-            className="panel panel-feilsammendrag text-left"
+            className="feedbacksummary"
             tabIndex="-1"
         >
-            <h3 className="typo-undertittel">{header}</h3>
+            <h3>{header}</h3>
             <ul>
                 {errors}
             </ul>
@@ -76,7 +76,7 @@ export function feedbackSummaryFactory(listCreator = DefaultListCreator,
     }
 
     FeedbackSummary.defaultProps = {
-        header: 'Feil ved innsending'
+        header: 'Errors'
     };
     FeedbackSummary.propTypes = {
         header: PT.string.isRequired

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React, { PropTypes as PT } from 'react';
 import { SubmissionError } from 'redux-form';
-import SkjemaFelt from './../src/nav-field';
+import SkjemaFelt from '../src/field';
 import { rules } from './../src/validate';
 import validForm from './../src/validForm';
 
@@ -9,11 +9,11 @@ function Login(props) {
     return (
         <form onSubmit={props.handleSubmit} noValidate="noValidate">
             {props.errorSummary}
-            <SkjemaFelt name="firstName" type="text" className="blokk-s" required aria-required="true">
+            <SkjemaFelt name="firstName" type="text" required aria-required="true">
                 First Name
             </SkjemaFelt>
-            <SkjemaFelt name="lastName" type="text" className="blokk-s" required>Last Name</SkjemaFelt>
-            <SkjemaFelt name="email" type="text" className="blokk-s">Email</SkjemaFelt>
+            <SkjemaFelt name="lastName" type="text" required>Last Name</SkjemaFelt>
+            <SkjemaFelt name="email" type="text">Email</SkjemaFelt>
             <button type="submit">Submit</button>
         </form>
     );
@@ -24,7 +24,8 @@ Login.propTypes = {
     errorSummary: PT.node.isRequired
 };
 
-// later som man gjør ett fetch kall. Blir ikke kalt før skjemaet er validert ok. :)
+// Pretending to do a `fetch`-call, which should not be called before the schema is validated.
+// This is just for test purposes.
 const asyncOnsubmit = (values) => new Promise((resolve, _reject) => {
     console.log('onSubmit config', values);
     // _reject('ok');     // Returns promise, resolved([ undefined ])
