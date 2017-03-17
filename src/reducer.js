@@ -3,8 +3,6 @@ import { reducer as formReducer } from 'redux-form';
 export function updatedFormState(form, oldState, newState) {
     const formState = { ...oldState[form], ...newState };
 
-    console.log('nState', form, newState);
-
     return {
         ...oldState,
         [form]: formState
