@@ -16,7 +16,9 @@ const createInlineError = (name, inlineErrorClass, meta) => {
     return null;
 };
 
-export function FieldRenderer({ input, meta, type, name, label, className, errorClass, inlineErrorClass, ...props }) {
+export function FieldRenderer({ input, meta, type, label, className, errorClass, inlineErrorClass, ...props }) {
+    const name = input.name;
+
     const inlineError = createInlineError(name, inlineErrorClass, meta);
     const ekstraProps = {
         'aria-invalid': meta.touched && !!meta.error,
@@ -38,7 +40,6 @@ FieldRenderer.propTypes = {
     input: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     meta: PT.object.isRequired, // eslint-disable-line react/forbid-prop-types
     type: PT.string.isRequired,
-    name: PT.string.isRequired,
     label: PT.node.isRequired,
     className: PT.string,
     errorClass: PT.string,

@@ -2,6 +2,7 @@ import { reducer as formReducer } from 'redux-form';
 
 export function updatedFormState(form, oldState, newState) {
     const formState = { ...oldState[form], ...newState };
+
     return {
         ...oldState,
         [form]: formState
@@ -25,19 +26,16 @@ export default function reducer(state = {}, action) {
     }
 
     // Actual reducer logic
-    switch (action.type) {
-        case 'redux-form/SET_SUBMIT_FAILED': {
-            return updatedFormState(form, nState, { submittoken: 'token' });
+    if (action.type.indexOf('redux-form/SET_SUBMIT_FAILED') >= 0) {
+        return updatedFormState(form, nState, { submittoken: 'token' });
+    } else if (action.type.indexOf('redux-form/UPDATE_SYNC_ERRORS') >= 0) {
+        const errors = action.payload.syncErrors || {};
+
+        if (Object.keys(errors).length === 0) {
+            return updatedFormState(form, nState, { submittoken: null });
         }
-        case 'redux-form/UPDATE_SYNC_ERRORS': {
-            const errors = action.payload.syncErrors || {};
-            if (Object.keys(errors).length === 0) {
-                return updatedFormState(form, nState, { submittoken: null });
-            }
-            return nState;
-        }
-        default: {
-            return nState;
-        }
+        return nState;
+    } else {
+        return nState;
     }
 }
