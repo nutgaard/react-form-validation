@@ -26,6 +26,12 @@ export default function validForm(config) {
         };
 
         class Wrapper extends Component {
+            constructor(props) {
+                super(props);
+
+                this.handleSubmitProxy = this.handleSubmitProxy.bind(this);
+            }
+
             handleSubmitProxy(...args) {
                 return Promise.resolve(this.props.handleSubmit(...args))
                     .then((result) => {
@@ -63,7 +69,7 @@ export default function validForm(config) {
                 const useProps = {
                     ...props,
                     errorSummary,
-                    handleSubmit: this.handleSubmitProxy.bind(this)
+                    handleSubmit: this.handleSubmitProxy
                 };
 
                 return createElement(WrappedComponent, useProps);

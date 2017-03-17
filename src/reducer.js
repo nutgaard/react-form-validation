@@ -35,7 +35,6 @@ export default function reducer(state = {}, action) {
             return updatedFormState(form, nState, { submittoken: null });
         }
         return nState;
-    } else {
-        return nState;
     }
+    return nState;
 }
