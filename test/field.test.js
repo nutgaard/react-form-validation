@@ -21,10 +21,11 @@ describe('LabelledField', () => {
 
     describe('FieldRenderer', () => {
         const defaultProps = {
-            input: {},
+            input: {
+                name: 'name'
+            },
             meta: {},
             type: 'text',
-            name: 'name',
             label: 'label'
         };
         const defaultErrorProps = {
