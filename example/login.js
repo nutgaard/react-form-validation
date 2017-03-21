@@ -1,9 +1,20 @@
 /* eslint-disable no-console */
 import React, { PropTypes as PT } from 'react';
 import { SubmissionError } from 'redux-form';
-import SkjemaFelt from '../src/field';
+import { LabelledField as SkjemaFelt, CustomField } from '../src/field';
 import { rules } from './../src/validate';
 import validForm from './../src/validForm';
+
+function MyCustomComponent({ children, input, meta, ...props }) {
+    const id = ('' + Math.random()).slice(2);
+    console.log('input', input);
+    return (
+        <div>
+            <label htmlFor={id}>{children}</label>
+            <input type="text" id={id} {...input} {...props} />
+        </div>
+    );
+}
 
 function Login(props) {
     return (
@@ -14,6 +25,11 @@ function Login(props) {
             </SkjemaFelt>
             <SkjemaFelt name="lastName" type="text" required>Last Name</SkjemaFelt>
             <SkjemaFelt name="email" type="text">Email</SkjemaFelt>
+            <CustomField
+                name="customComponent"
+                customComponent={
+                    <MyCustomComponent>Min label</MyCustomComponent>
+                } />
             <button type="submit">Submit</button>
         </form>
     );
@@ -45,6 +61,7 @@ export default validForm({
     validate: {
         firstName: [rules.required, rules.contains('a')],
         lastName: [rules.required, rules.contains('b')],
-        email: [rules.required, rules.contains('c')]
+        email: [rules.required, rules.contains('c')],
+        customComponent: [rules.required],
     }
 })(Login);
