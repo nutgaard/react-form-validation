@@ -17,4 +17,36 @@ npm install react-redux-form-validation react react-dom react-redux redux redux-
 
 ## How to use
 
-**TODO**, for now look at the example and source code.
+Import and use the `react-form-validation` components, in stead of the corresponding `redux-form` components. 
+```
+import { LabelledField, validForm, rules } from 'react-redux-form-validation';
+```
+In your form use the `react-form-validation` components.
+```
+<LabelledField name="title" type="text">
+    Title Label
+</LabelledField>
+```
+When making your `redux-form` use `react-form-validation`'s `validForm` method, and pass it a `validate` prop for the fields that you want to validate. `react-form-validation` also provides rules that you can use to simplefy the declaration.
+```
+const myValidForm = validForm({
+    form: 'my-form',
+    onSubmit: onSubmit,
+    validate: {
+        title: [rules.required],
+        field-two: [rules.required, rules.contains('content')]
+    }
+})(ValidFormComponent);
+```
+finaly, you have to use the `react-form-validation` reducer in stead of the `redux-form` reducer.
+```
+import { reducer as formReducer } from 'react-redux-form-validation';
+
+export default combineReducers({
+    form: formReducer
+});
+```
+
+---
+
+An example can be seen in the [example](example)
