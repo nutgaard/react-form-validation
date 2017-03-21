@@ -6,7 +6,7 @@ import { shallow, mount } from 'enzyme';
 import { reduxForm } from 'redux-form';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import LabelledField, * as Func from '../src/field';
+import * as Func from '../src/field';
 
 describe('LabelledField', () => {
     describe('fieldClasses', () => {
@@ -95,9 +95,9 @@ describe('LabelledField', () => {
             const wrapper = mount(
                 <Provider store={store}>
                     <ContextProvider>
-                        <LabelledField className="test" required="required" name="name" type="text">
+                        <Func.LabelledField className="test" required="required" name="name" type="text">
                             label
-                        </LabelledField>
+                        </Func.LabelledField>
                     </ContextProvider>
                 </Provider>
             );
