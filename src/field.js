@@ -16,7 +16,17 @@ const createInlineError = (name, inlineErrorClass, meta) => {
     return null;
 };
 
-export function FieldRenderer({ input, meta, type, label, className, errorClass, inlineErrorClass, ...props }) {
+export function FieldRenderer({
+    input,
+    meta,
+    type,
+    label,
+    className,
+    inputClass,
+    labelClass,
+    errorClass,
+    inlineErrorClass,
+    ...props }) {
     const name = input.name;
 
     const inlineError = createInlineError(name, inlineErrorClass, meta);
@@ -29,14 +39,20 @@ export function FieldRenderer({ input, meta, type, label, className, errorClass,
 
     return (
         <div className={fieldClasses(className, errorClass, meta)}>
-            <label htmlFor={name}>{label}</label>
-            <input type={type} {...input} {...ekstraProps} />
+            <label className={labelClass} htmlFor={name}>{label}</label>
+            <input className={inputClass} type={type} {...input} {...ekstraProps} />
             {inlineError}
         </div>
     );
 }
 
-export function CustomFieldRenderer({ input, meta, customComponent, className, errorClass, inlineErrorClass,
+export function CustomFieldRenderer({
+    input,
+    meta,
+    customComponent,
+    className,
+    errorClass,
+    inlineErrorClass,
     ...props }) {
     const name = input.name;
     const inlineError = createInlineError(name, inlineErrorClass, meta);
@@ -63,6 +79,8 @@ FieldRenderer.propTypes = {
     type: PT.string.isRequired,
     label: PT.node.isRequired,
     className: PT.string,
+    inputClass: PT.string,
+    labelClass: PT.string,
     errorClass: PT.string,
     inlineErrorClass: PT.string
 };

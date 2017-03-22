@@ -25,6 +25,7 @@ function Login(props) {
             </SkjemaFelt>
             <SkjemaFelt name="lastName" type="text" required>Last Name</SkjemaFelt>
             <SkjemaFelt name="email" type="text">Email</SkjemaFelt>
+            <SkjemaFelt name="styledField" type="text" inputClass="input-class" labelClass="label-class">Styled field</SkjemaFelt>
             <CustomField
                 name="customComponent"
                 customComponent={
