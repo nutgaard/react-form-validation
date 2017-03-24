@@ -42,6 +42,12 @@ describe('validate', () => {
         it('should return undefined when valid', () => {
             expect(Func.maxLength(3, 'e')('aba')).to.be.equal(undefined);
         });
+        it('should return undefined for empty string', () => {
+            expect(Func.maxLength(3, 'e')('')).to.be.equal(undefined);
+        });
+        it('should return undefined for undefined input', () => {
+            expect(Func.maxLength(3, 'e')(undefined)).to.be.equal(undefined);
+        });
     });
 
     describe('contains', () => {
