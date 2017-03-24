@@ -5,7 +5,7 @@ export function minLength(min, error = 'min-length') {
     return (value) => (value && value.length >= min ? undefined : error);
 }
 export function maxLength(max, error = 'max-length') {
-    return (value) => (value && value.length <= max ? undefined : error);
+    return (value) => (value && value.length >= max ? error : undefined);
 }
 export function contains(needle, error = 'contains') {
     return (value) => (value && value.includes(needle) ? undefined : error);
