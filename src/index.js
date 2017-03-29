@@ -7,4 +7,5 @@ export {
 
 export { default as validForm } from './validForm';
 
-export { LabelledField, CustomField } from './field';
+export { default as LabelledField } from './fields/labelled-field';
+export { default as CustomField } from './fields/custom-field';

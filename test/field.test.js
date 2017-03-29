@@ -6,16 +6,17 @@ import { shallow, mount } from 'enzyme';
 import { reduxForm } from 'redux-form';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import * as Func from '../src/field';
+import LabelledField, { FieldRenderer } from '../src/fields/labelled-field';
+import { fieldClasses } from '../src/fields/field-utils';
 
 describe('LabelledField', () => {
     describe('fieldClasses', () => {
         it('should return classNames if there is no validation errors', () => {
-            expect(Func.fieldClasses('test', '', {})).to.equal('test');
+            expect(fieldClasses('test', '', {})).to.equal('test');
         });
 
         it('should return extra class if there are errors', () => {
-            expect(Func.fieldClasses('test', 'error-class', { touched: true, error: [] })).to.equal('test error-class');
+            expect(fieldClasses('test', 'error-class', { touched: true, error: [] })).to.equal('test error-class');
         });
     });
 
@@ -34,7 +35,7 @@ describe('LabelledField', () => {
         };
 
         it('should render field', () => {
-            const wrapper = shallow(<Func.FieldRenderer {...defaultProps} />);
+            const wrapper = shallow(<FieldRenderer {...defaultProps} />);
 
             const div = wrapper.find('div');
             const label = div.find('label');
@@ -51,7 +52,7 @@ describe('LabelledField', () => {
         });
 
         it('should render div with className', () => {
-            const wrapper = shallow(<Func.FieldRenderer {...defaultProps} className="test" />);
+            const wrapper = shallow(<FieldRenderer {...defaultProps} className="test" />);
 
             const div = wrapper.find('div');
 
@@ -60,7 +61,7 @@ describe('LabelledField', () => {
         });
 
         it('should pass props onto input-field', () => {
-            const wrapper = shallow(<Func.FieldRenderer {...defaultProps} required="required" />);
+            const wrapper = shallow(<FieldRenderer {...defaultProps} required="required" />);
 
             const input = wrapper.find('input');
 
@@ -68,7 +69,7 @@ describe('LabelledField', () => {
         });
 
         it('should render inline-error message if there are errors', () => {
-            const wrapper = shallow(<Func.FieldRenderer {...defaultErrorProps} />);
+            const wrapper = shallow(<FieldRenderer {...defaultErrorProps} />);
 
             const errorMessage = wrapper.find('#error-name');
             const input = wrapper.find('input');
@@ -95,9 +96,9 @@ describe('LabelledField', () => {
             const wrapper = mount(
                 <Provider store={store}>
                     <ContextProvider>
-                        <Func.LabelledField className="test" required="required" name="name" type="text">
+                        <LabelledField className="test" required="required" name="name" type="text">
                             label
-                        </Func.LabelledField>
+                        </LabelledField>
                     </ContextProvider>
                 </Provider>
             );

@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import React, { PropTypes as PT } from 'react';
 import { SubmissionError } from 'redux-form';
-import { LabelledField as SkjemaFelt, CustomField } from '../src/field';
+import LabelledField from '../src/fields/labelled-field';
+import CustomField from '../src/fields/custom-field';
 import { rules } from './../src/validate';
 import validForm from './../src/validForm';
 
@@ -20,12 +21,11 @@ function Login(props) {
     return (
         <form onSubmit={props.handleSubmit} noValidate="noValidate">
             {props.errorSummary}
-            <SkjemaFelt name="firstName" type="text" required aria-required="true">
+            <LabelledField name="firstName" type="text" required aria-required="true">
                 First Name
-            </SkjemaFelt>
-            <SkjemaFelt name="lastName" type="text" required>Last Name</SkjemaFelt>
-            <SkjemaFelt name="email" type="text">Email</SkjemaFelt>
-            <SkjemaFelt name="styledField" type="text" inputClass="input-class" labelClass="label-class">Styled field</SkjemaFelt>
+            </LabelledField>
+            <LabelledField name="lastName" type="text" required>Last Name</LabelledField>
+            <LabelledField name="email" type="text">Email</LabelledField>
             <CustomField
                 name="customComponent"
                 customComponent={
