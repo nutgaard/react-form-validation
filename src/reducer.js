@@ -21,6 +21,11 @@ export default function reducer(state = {}, action) {
     }
     const nState = formReducer(state, action);
 
+    // Form is no longer managed, quit now, while you're ahead....
+    if (!nState[form]) {
+        return nState;
+    }
+
     if (!{}.hasOwnProperty.call(nState[form], 'submittoken')) {
         return updatedFormState(form, nState, { submittoken: null });
     }
