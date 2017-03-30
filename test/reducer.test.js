@@ -110,5 +110,17 @@ describe('reducer', () => {
             expect(newState.form1.submittoken).to.equal('token');
             expect(newState.form2.submittoken).to.equal(undefined);
         });
+
+        it('should not mutate state when form is destroyed', () => {
+            const initialState = { form1: {}};
+            reducer.__Rewire__('formReducer', (s) => s);
+            const newState = reducer(initialState, {
+                type: 'redux-form/DESTROY',
+                meta: {}
+            });
+            reducer.__ResetDependency__('formReducer');
+
+            expect(newState.form1).to.equal(initialState.form1);
+        })
     });
 });
