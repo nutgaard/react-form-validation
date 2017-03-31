@@ -13,12 +13,11 @@ export function CustomFieldRenderer({ input, meta, customComponent, className, e
         ...props
     };
 
-    const augmentedComponent = cloneElement(customComponent, { ...ekstraProps, input, meta });
+    const augmentedComponent = cloneElement(customComponent, { ...ekstraProps, inlineError, input, meta });
 
     return (
         <div className={fieldClasses(className, errorClass, meta)}>
             {augmentedComponent}
-            {inlineError}
         </div>
     );
 }

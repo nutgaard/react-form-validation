@@ -45,8 +45,7 @@ export default function validForm(config) {
                             .find((errorField) => fields.includes(errorField));
 
                         if (hasField) {
-                            // eslint-disable-next-line react/no-string-refs
-                            const summary = this.refs.panel.getRenderedComponent();
+                            const summary = this.summaryPanel.getRenderedComponent();
                             findDOMNode(summary).focus(); // eslint-disable-line react/no-find-dom-node
                         }
 
@@ -63,7 +62,7 @@ export default function validForm(config) {
                         component={defaultSummary}
                         submittoken={submittoken}
                         withRef
-                        ref="panel" // eslint-disable-line react/no-string-refs
+                        ref={(panel) => { this.summaryPanel = panel; }}
                     />
                 );
                 const useProps = {
