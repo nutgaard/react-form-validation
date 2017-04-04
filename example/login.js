@@ -58,6 +58,7 @@ const asyncOnsubmit = (values) => new Promise((resolve, _reject) => {
 
 export default validForm({
     form: 'login',
+    errorSummaryTitle: 'Fix these errors',
     onSubmit: asyncOnsubmit,
     validate: {
         firstName: [rules.required, rules.contains('a')],
