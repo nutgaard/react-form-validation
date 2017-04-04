@@ -6,13 +6,13 @@ import CustomField from '../src/fields/custom-field';
 import { rules } from './../src/validate';
 import validForm from './../src/validForm';
 
-function MyCustomComponent({ children, input, inlineError, meta, ...props }) {
+function MyCustomComponent({ children, input, errorMessage, meta, ...props }) {
     const id = ('' + Math.random()).slice(2);
     return (
         <div>
             <label htmlFor={id}>{children}</label>
             <input type="text" id={id} {...input} {...props} />
-            <div>{inlineError}</div>
+            <div role="alert" aria-live="assertive">{errorMessage}</div>
         </div>
     );
 }

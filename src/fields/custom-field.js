@@ -1,11 +1,11 @@
 import React, { PropTypes as PT, cloneElement } from 'react';
 import { Field } from 'redux-form';
-import { createInlineError, fieldClasses } from './field-utils';
+import { fieldClasses } from './field-utils';
 
-export function CustomFieldRenderer({ input, meta, customComponent, className, errorClass, inlineErrorClass,
+export function CustomFieldRenderer({ input, meta, customComponent, className, errorClass,
     ...props }) {
     const name = input.name;
-    const inlineError = createInlineError(name, inlineErrorClass, meta);
+    const errorMessage = (meta.touched && meta.error) ? meta.error : null;
     const ekstraProps = {
         'aria-invalid': meta.touched && !!meta.error,
         'aria-describedby': meta.touched && meta.error ? `error-${name}` : '',
@@ -13,7 +13,7 @@ export function CustomFieldRenderer({ input, meta, customComponent, className, e
         ...props
     };
 
-    const augmentedComponent = cloneElement(customComponent, { ...ekstraProps, inlineError, input, meta });
+    const augmentedComponent = cloneElement(customComponent, { ...ekstraProps, errorMessage, input, meta });
 
     return (
         <div className={fieldClasses(className, errorClass, meta)}>
