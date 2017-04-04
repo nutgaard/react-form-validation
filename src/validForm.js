@@ -12,7 +12,7 @@ function getSubmittokenFromStore(form) {
 }
 
 export default function validForm(config) {
-    const { form, validate, listCreator, elementCreator, ...rest } = config;
+    const { form, errorSummaryTitle, validate, listCreator, elementCreator, ...rest } = config;
 
     const defaultSummary = feedbackSummaryFactory(listCreator, elementCreator);
 
@@ -59,6 +59,7 @@ export default function validForm(config) {
                 const errorSummary = (
                     <Fields
                         names={fields}
+                        header={errorSummaryTitle}
                         component={defaultSummary}
                         submittoken={submittoken}
                         withRef
