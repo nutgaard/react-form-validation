@@ -1,7 +1,7 @@
 {
   "name": "react-redux-form-validation",
   "description": "Custom validation with redux-forms",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "./dist/index.js",
   "license": "X11",
   "homepage": "https://github.com/nutgaard/react-form-validation",
