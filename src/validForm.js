@@ -6,9 +6,13 @@ import { feedbackSummaryFactory } from './feedback-summary';
 import validation from './validate';
 
 function getSubmittokenFromStore(form) {
-    return (state) => ({
-        submittoken: state.form[form].submittoken
-    });
+    return (state, ownProps) => {
+        const formname = ownProps.form || form;
+
+        return ({
+            submittoken: state.form[formname].submittoken
+        });
+    };
 }
 
 export default function validForm(config) {
