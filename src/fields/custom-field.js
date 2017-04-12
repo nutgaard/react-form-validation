@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 import { fieldClasses } from './field-utils';
 
 export function CustomFieldRenderer({ input, meta, customComponent, className, errorClass,
+    inlineErrorClass: _inlineErrorClass,
     ...props }) {
     const name = input.name;
     const errorMessage = (meta.touched && meta.error) ? meta.error : null;

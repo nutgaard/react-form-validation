@@ -7,6 +7,9 @@ function Application() {
     return (
         <div>
             <Login />
+            <Login form="login-second"/>
+            <Login form="login-third"/>
+            <Login form="login-third"/>
             <DevTools />
         </div>
     );
