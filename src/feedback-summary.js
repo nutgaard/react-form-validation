@@ -79,7 +79,7 @@ export function feedbackSummaryFactory(listCreator = DefaultListCreator,
         header: 'Errors'
     };
     FeedbackSummary.propTypes = {
-        header: PT.string.isRequired
+        header: PT.node.isRequired
     };
 
     return FeedbackSummary;
