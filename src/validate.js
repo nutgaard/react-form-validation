@@ -21,12 +21,12 @@ export const rules = {
 };
 
 export default function validate(config) {
-    return (values) =>
+    return (values, props) =>
         Object.entries(config)
             .map(([field, allrules]) => ({
                 field,
                 errors: arrayOf(allrules)
-                    .map((rule) => rule(values[field]))
+                    .map((rule) => rule(values[field], props))
                     .filter((rule) => rule)
             }))
             .filter(({ errors }) => errors && errors.length > 0)
