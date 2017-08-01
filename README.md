@@ -27,7 +27,7 @@ In your form use the `react-form-validation` components.
     Title Label
 </LabelledField>
 ```
-When making your `redux-form` use `react-form-validation`'s `validForm` method, and pass it a `validate` prop for the fields that you want to validate. `react-form-validation` also provides rules that you can use to simplefy the declaration.
+When making your `redux-form` use `react-form-validation`'s `validForm` method, and pass it a `validate` prop for the fields that you want to validate. `react-form-validation` also provides rules that you can use to simplify the declaration.
 ```
 const myValidForm = validForm({
     form: 'my-form',
