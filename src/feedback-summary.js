@@ -40,7 +40,7 @@ export function getErrors(props) {
     if (submittoken === null) {
         return null;
     }
-
+    console.log('getErrors', props, names, fields);
     const formErrors = names
         .map((name) => ({ name, errors: fields[name].meta.error }))
         .filter(({ errors }) => errors && errors.length > 0)
