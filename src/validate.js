@@ -14,16 +14,21 @@ export function contains(needle, error = 'contains') {
 export const required = minLength(0, 'required');
 
 export const array = (name, config) => {
-    const arrayValidator = (values, props) => values
+    const arrayValidator = (values, props) => {
+        const arrayErrors = values
             .map((value) => Object.entries(config)
-                    .map(([field, allrules]) => ({
-                        field,
-                        errors: arrayOf(allrules)
-                            .map((rule) => rule(value[field], props))
-                            .filter((rule) => rule)
-                    }))
-                    .filter(({ errors }) => errors && errors.length > 0)
-                    .reduce((acc, field) => ({ ...acc, [field.field]: field.errors }), {}));
+                .map(([field, allrules]) => ({
+                    field,
+                    errors: arrayOf(allrules)
+                        .map((rule) => rule(value[field], props))
+                        .filter((rule) => rule)
+                }))
+                .filter(({ errors }) => errors && errors.length > 0)
+                .reduce((acc, field) => ({ ...acc, [field.field]: field.errors }), {})
+            ).filter((element) => Object.keys(element).length > 0);
+
+        return arrayErrors.length === 0 ? undefined : arrayErrors;
+    };
 
     arrayValidator.isArrayValidator = true;
 
