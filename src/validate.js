@@ -17,17 +17,18 @@ export const array = (name, config) => {
     const arrayValidator = (values, props) => {
         const arrayErrors = values
             .map((value) => Object.entries(config)
-                .map(([field, allrules]) => ({
-                    field,
-                    errors: arrayOf(allrules)
+                .reduce((errors, [field, allrules]) => {
+                    const fielderrors = arrayOf(allrules)
                         .map((rule) => rule(value[field], props))
-                        .filter((rule) => rule)
-                }))
-                .filter(({ errors }) => errors && errors.length > 0)
-                .reduce((acc, field) => ({ ...acc, [field.field]: field.errors }), {})
-            ).filter((element) => Object.keys(element).length > 0);
+                        .filter((rule) => rule);
+                    if (fielderrors.length === 0) {
+                        return errors;
+                    }
+                    return { ...errors, [field]: fielderrors };
+                }, {})
+            ).map((element) => (Object.keys(element).length > 0 ? element : undefined));
 
-        return arrayErrors.length === 0 ? undefined : arrayErrors;
+        return arrayErrors.every((element) => element === undefined) ? undefined : arrayErrors;
     };
 
     arrayValidator.isArrayValidator = true;

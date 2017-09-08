@@ -43,8 +43,8 @@ export default validForm({
     validate: {
         tittel: [rules.required, rules.minLength(10)],
         list: rules.array('list', {
-            name: [rules.required, rules.minLength(10)],
-            description: [rules.minLength(20)]
+            name: [rules.required],
+            description: [rules.required]
         })
     }
 })(Dynamiclist);

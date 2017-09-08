@@ -7,16 +7,16 @@ import DynamicList from './dynamiclist';
 const initialValues = {
     list: [
         {
-            name: 'Name 1',
-            description: 'Description 1'
+            name: '',
+            description: ''
         },
         {
-            name: 'Name 2 Name 2',
-            description: 'Description 2 Description 2'
+            name: '',
+            description: ''
         },
         {
-            name: 'Name 3',
-            description: 'Description 3'
+            name: '',
+            description: ''
         }
     ]
 };

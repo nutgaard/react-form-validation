@@ -1,4 +1,4 @@
-import React, { PropTypes as PT, Component } from 'react';
+import React, { Component, PropTypes as PT } from 'react';
 
 export function DefaultListCreator({ header, errors }) {
     return (
@@ -16,6 +16,7 @@ export function DefaultListCreator({ header, errors }) {
         </div>
     );
 }
+
 DefaultListCreator.propTypes = {
     header: PT.oneOfType([PT.string, PT.node]).isRequired,
     errors: PT.arrayOf(PT.node).isRequired
@@ -29,6 +30,7 @@ export function DefaultElementCreator({ name, error }) {
         </li>
     );
 }
+
 DefaultElementCreator.propTypes = {
     name: PT.string.isRequired,
     error: PT.string.isRequired
@@ -51,13 +53,19 @@ export function getErrors(props) {
         .filter(({ errors }) => errors && errors.length > 0)
         .reduce((acc, namedErrors) => {
             if (isUsingFieldArray(namedErrors)) {
-                const suberrorsConfig = namedErrors.errors.map((suberrors, idx) => Object.entries(suberrors)
-                        .map(([subkey, suberror]) => ({
-                            name: `${namedErrors.name}[${idx}].${subkey}`,
-                            error: suberror
-                        })))
-                .filter((suberrors) => suberrors.length > 0)
-                .reduce((list, suberrors) => [...list, ...suberrors], []);
+                const suberrorsConfig = namedErrors.errors
+                    .map((suberrors, idx) => {
+                        if (!suberrors) {
+                            return [];
+                        }
+                        return Object.entries(suberrors)
+                            .map(([subkey, suberror]) => ({
+                                name: `${namedErrors.name}[${idx}].${subkey}`,
+                                error: suberror
+                            }));
+                    })
+                    .filter((suberrors) => suberrors.length > 0)
+                    .reduce((list, suberrors) => [...list, ...suberrors], []);
 
                 return [...acc, ...suberrorsConfig];
             } else if (Array.isArray(namedErrors.errors)) {
@@ -77,7 +85,7 @@ export function getErrors(props) {
 }
 
 export function feedbackSummaryFactory(listCreator = DefaultListCreator,
-                                elementCreator = DefaultElementCreator) {
+                                       elementCreator = DefaultElementCreator) {
     class FeedbackSummary extends Component {
         render() {
             const errors = getErrors(this.props);
