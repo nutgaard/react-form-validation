@@ -129,6 +129,22 @@ describe('feedback-summary', () => {
                 { name: 'list[1].description', error: ['required'] }
             ]);
         });
+
+        it('should only return fields in list with error', () => {
+            const props = {
+                submittoken: 'token',
+                names: ['title', 'list'],
+                title: { meta: { error: 'required' } },
+                list: { meta: { error: [{ },
+                    { name: ['required'], description: ['required'] }] } }
+            };
+
+            expect(Func.getErrors(props)).to.deep.equal([
+                { name: 'title', error: 'required' },
+                { name: 'list[1].name', error: ['required'] },
+                { name: 'list[1].description', error: ['required'] }
+            ]);
+        });
     });
 
     describe('feedbackSummaryFactory', () => {
