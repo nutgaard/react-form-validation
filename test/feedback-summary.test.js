@@ -135,7 +135,7 @@ describe('feedback-summary', () => {
                 submittoken: 'token',
                 names: ['title', 'list'],
                 title: { meta: { error: 'required' } },
-                list: { meta: { error: [{ },
+                list: { meta: { error: [undefined,
                     { name: ['required'], description: ['required'] }] } }
             };
 
