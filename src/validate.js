@@ -13,23 +13,45 @@ export function contains(needle, error = 'contains') {
 
 export const required = minLength(0, 'required');
 
+export const array = (name, config) => {
+    const arrayValidator = (values, props) => {
+        const arrayErrors = values
+            .map((value) => Object.entries(config)
+                .reduce((errors, [field, allrules]) => {
+                    const fielderrors = arrayOf(allrules)
+                        .map((rule) => rule(value[field], props))
+                        .filter((rule) => rule);
+                    if (fielderrors.length === 0) {
+                        return errors;
+                    }
+                    return { ...errors, [field]: fielderrors };
+                }, {})
+            ).map((element) => (Object.keys(element).length > 0 ? element : undefined));
+
+        return arrayErrors.every((element) => element === undefined) ? undefined : arrayErrors;
+    };
+
+    arrayValidator.isArrayValidator = true;
+
+    return arrayValidator;
+};
+
 export const rules = {
     minLength,
     maxLength,
     contains,
-    required
+    required,
+    array
 };
 
 export default function validate(config) {
-    return (values, props) =>
-        Object.entries(config)
+    return (values, props) => Object.entries(config)
             .map(([field, allrules]) => ({
                 field,
-                errors: arrayOf(allrules)
+                errors: allrules.isArrayValidator ? (allrules(values[field], props)) : arrayOf(allrules)
                     .map((rule) => rule(values[field], props))
                     .filter((rule) => rule)
             }))
             .filter(({ errors }) => errors && errors.length > 0)
-            .reduce((acc, { field, errors }) => ({ ...acc, [field]: errors }), {})
-        ;
+            .reduce((acc, { field, errors }) => ({ ...acc, [field]: errors }), {});
 }

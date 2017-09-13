@@ -76,6 +76,43 @@ describe('validate', () => {
         });
     });
 
+    describe('array', () => {
+        const noErrorValidator = () => undefined;
+        const generateErrorValidator = () => 'Something wrong';
+        const lengthCheck = (v) => v.length > 2 ? undefined : 'Length to small';
+
+        it('should return a validator function', () => {
+            const arrayValidator = Func.array('name', {});
+
+            expect(typeof arrayValidator).to.be.equal('function');
+            expect(arrayValidator.isArrayValidator).to.be.equal(true);
+        });
+
+        it('should return undefined if there are no errors', () => {
+            const arrayValidator = Func.array('name', { fieldName: noErrorValidator });
+            const errors = arrayValidator([
+                { fieldName: 'ok', fieldName2: 'ok' },
+                { fieldName: 'ok', fieldName2: 'ok' }
+            ]);
+
+            expect(errors).to.be.equal(undefined);
+        });
+
+        it('should return errors if there are errors', () => {
+            const arrayValidator = Func.array('name', { fieldName: generateErrorValidator, fieldName2: lengthCheck });
+            const errors = arrayValidator([
+                { fieldName: 'ok', fieldName2: 'ok' },
+                { fieldName: 'ok', fieldName2: 'ok2' }
+            ]);
+
+            expect(Array.isArray(errors)).to.be.equal(true);
+            expect(errors.length).to.be.equal(2);
+            expect(errors[0].fieldName[0]).to.be.equal('Something wrong');
+            expect(errors[0].fieldName2[0]).to.be.equal('Length to small');
+            expect(errors[1].fieldName[0]).to.be.equal('Something wrong');
+        });
+    });
+
     describe('validate', () => {
         const error = (id) => `error${id}`;
         const rule = (id) => () => `error${id}`;
