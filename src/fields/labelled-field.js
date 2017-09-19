@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import PT from 'prop-types';
+import React from 'react';
 import { Field } from 'redux-form';
 import { createInlineError, fieldClasses } from './field-utils';
 

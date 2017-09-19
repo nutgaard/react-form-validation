@@ -1,4 +1,5 @@
-import React, { PropTypes as PT } from 'react';
+import PT from 'prop-types';
+import React from 'react';
 import { FieldArray } from 'redux-form';
 import LabelledField from '../src/fields/labelled-field';
 import { rules } from './../src/validate';
