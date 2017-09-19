@@ -1,4 +1,5 @@
-import React, { Component, PropTypes as PT } from 'react';
+import PT from 'prop-types';
+import React, { Component } from 'react';
 
 export function DefaultListCreator({ header, errors }) {
     return (
