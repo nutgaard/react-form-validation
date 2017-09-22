@@ -1,4 +1,5 @@
-import React, { createElement, PropTypes as PT, Component } from 'react';
+import React, { createElement, Component } from 'react';
+import PT from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { Fields, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';

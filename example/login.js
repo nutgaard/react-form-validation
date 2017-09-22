@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import React, { PropTypes as PT } from 'react';
+import React from 'react';
+import PT from 'prop-types';
 import { SubmissionError } from 'redux-form';
 import LabelledField from '../src/fields/labelled-field';
 import CustomField from '../src/fields/custom-field';

@@ -1,4 +1,5 @@
-import React, { PropTypes as PT, cloneElement } from 'react';
+import React, { cloneElement } from 'react';
+import PT from 'prop-types';
 import { Field } from 'redux-form';
 import { fieldClasses } from './field-utils';
 
