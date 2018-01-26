@@ -3,10 +3,12 @@
 import React from 'react';
 import chai, { expect } from 'chai';
 import subset from 'chai-subset';
-import { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
 import * as Func from '../src/feedback-summary';
 
 chai.use(subset);
+configure({ adapter: new Adapter() });
 
 describe('feedback-summary', () => {
     describe('DefaultListCreator', () => {

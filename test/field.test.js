@@ -2,12 +2,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import { shallow, mount, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { reduxForm } from 'redux-form';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import LabelledField, { FieldRenderer } from '../src/fields/labelled-field';
 import { fieldClasses } from '../src/fields/field-utils';
+
+configure({ adapter: new Adapter() });
 
 describe('LabelledField', () => {
     describe('fieldClasses', () => {
@@ -104,9 +107,8 @@ describe('LabelledField', () => {
             );
 
             const label = wrapper.find('label');
-            const classname = wrapper.find('.test');
-            const otherProps = wrapper.find('[required]');
-
+            const classname = wrapper.find('div.test');
+            const otherProps = wrapper.find('input[required]');
             expect(label.text()).to.equal('label');
 
             expect(classname.length).to.equal(1);
