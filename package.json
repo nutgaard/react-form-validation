@@ -30,7 +30,7 @@
     "circle": "yarn run lint && yarn run codecov"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.5.0",
     "react": "^15.3.2 || ^16.2.0",
     "react-dom": "^15.3.2 || ^16.2.0",
     "react-redux": "^4.4.5 || ^5.0.0",
