@@ -30,13 +30,13 @@
     "circle": "yarn run lint && yarn run codecov"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10 || ^15.6.0",
+    "prop-types": "^15.5.10",
     "react": "^15.3.2 || ^16.2.0",
     "react-dom": "^15.3.2 || ^16.2.0",
     "react-redux": "^4.4.5 || ^5.0.0",
-    "redux": "^3.6.0 || ^3.7.0",
+    "redux": "^3.6.0",
     "redux-form": "^6.1.1 || ^7.2.1",
-    "redux-thunk": "^2.1.0 || ^2.2.0"
+    "redux-thunk": "^2.1.0"
   },
   "dependencies": {
     "classnames": "^2.2.5"
