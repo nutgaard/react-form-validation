@@ -40,7 +40,8 @@ DefaultElementCreator.propTypes = {
 function isUsingFieldArray(namedErrors) {
     return Array.isArray(namedErrors.errors) &&
         namedErrors.errors.length > 0 &&
-        typeof namedErrors.errors[0] !== 'string';
+        typeof namedErrors.errors[0] !== 'string' &&
+        React.isValidElement(namedErrors.errors[0]) === false;
 }
 
 export function getErrors(props) {
