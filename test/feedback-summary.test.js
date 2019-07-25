@@ -99,7 +99,7 @@ describe('feedback-summary', () => {
             expect(Func.getErrors(props)).to.equal(null);
         });
 
-        it('should return all error', () => {
+        it('should return first error for each field', () => {
             const props = {
                 submittoken: 'token',
                 names: ['field1', 'field2'],
@@ -109,7 +109,6 @@ describe('feedback-summary', () => {
 
             expect(Func.getErrors(props)).to.deep.equal([
                 { name: 'field1', error: 'required' },
-                { name: 'field1', error: 'contains' },
                 { name: 'field2', error: 'contains' }
             ]);
         });
@@ -162,10 +161,9 @@ describe('feedback-summary', () => {
 
             const list = wrapper.find('ul');
 
-            expect(list.find('li').length).to.equal(3);
+            expect(list.find('li').length).to.equal(2);
             expect(list.childAt(0).text()).to.equal('required');
             expect(list.childAt(1).text()).to.equal('contains');
-            expect(list.childAt(2).text()).to.equal('contains');
         });
 
         it('should return null if there is no errors', () => {
